@@ -1,7 +1,7 @@
 # Design-Algo
 
-Coursework for Design and Algo class ya feelz
-This repository holds all the homework assignments from the course
+Coursework for Design and Algo class ya feelz.  
+This repository holds all the homework assignments from the course.
 
 - HW0 (Due January 19, 2021)
 - HW1 (Due January 28, 2021)
