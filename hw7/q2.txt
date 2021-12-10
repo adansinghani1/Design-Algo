@@ -1,0 +1,32 @@
+The reason why the Fused Bar approach won't work as well as the first way we implemetned the greedy approach because of the fact that we have to take all of the bars rather than a piece which can hinder with our ability to fill the bag with the greatest value of bars.
+So since we have a limit on how many bars we can carry, we pretty much have to check the amount of bars the respective metal has and if it is <= 7, then we are only allowed to take it (So in this case we cannot take silver because it is greater than 7).
+We can only take 4 bars of gold, 4 bars of steel, or 4 bars of steel and 4 bars of platinum (steel and bars can be interchanged). But we can never reach the maximum capcity of storing 7 bars with the "all or nothing" approach.
+The specific reason why this won't work in our code is the else statement:
+
+                if (bars.length <= 1){
+                    return bars[i].getCount();
+                }
+                // Quantity of count is less than W, we can take all the bars
+                else if (bars[i].getCount() < W)
+                {
+                    int totalBars = bars[i].getValue() * bars[i].getCount();
+                    total = total + totalBars; 
+                    W = W - bars[i].getCount();
+                }
+The following lines below                
+_________________________________________________________________________________                
+                else
+                {
+                // if count is > W, we take only the bars that are required to suffice the condition i.e. if we have 6 bars and we need one but the amount of bars are for the metal are 10, we only take one bar to maintain the condition 
+                extraBar = bars[i].getValue() * W;
+                total = total + extraBar;
+                W = W - W;
+                }
+            }
+            return total;
+        }
+        return 0;
+    }
+}
+
+The reason why is because since we are doing an "All or Nothing" approach where we take all the bars to suffice the condition for W, there is no guarantee that you can take all the count and get W to equal zero or make the capacity full.

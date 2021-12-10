@@ -1,0 +1,14 @@
+List the names of any students you worked with to complete this assignment.
+
+
+Link any references / videos / online tutorials / etc. that you used to complete this assignment.
+____________________________________________________________________________________________________
+https://www.geeksforgeeks.org/c-program-find-largest-element-array/
+https://codingbat.com/doc/java-array-loops.html
+https://leetcode.com/problems/two-sum/
+https://youtu.be/TbWXx-y-c54
+https://www.w3resource.com/java-exercises/array/java-array-exercise-35.php
+https://tldp.org/LDP/abs/html/nestedloops.html#:~:text=A%20nested%20loop%20is%20a,until%20the%20outer%20loop%20finishes.
+https://minigranth.in/core-java-tutorial/exception-handling-in-java
+https://www.homeandlearn.co.uk/java/boolean_values.html
+https://www.tutorialkart.com/java/java-array/java-check-if-array-is-empty/

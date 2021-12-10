@@ -1,0 +1,166 @@
+Algorithm:-
+
+I'll use greedy algorithm to solve this problem. I'll pick as many bars with highest available value as i can.
+
+I'll use user defined structure that can hold 3 values.
+
+First define a structure that can hold 3 values, call this structure as 'Node'.
+Convert two input arrays 'Count' and 'vals' into one single array of 'Node' of size 'n' and name it as 'Bars', I'll pick values at same index from array 'Count' and 'vals' and create one structure node for each index 'i', such that 'Node[i]' will contain 'Count[i]', 'vals[i]' as well as 'i' itself.
+Sort this array 'Bars' on the value of 'vals' in decreasing order. For resulting sorted array, 'Bars[i].val' will always be greater than or equal to 'Bars[i+1].val'.
+I'll start traversing 'Bars' array from index '0', I'll pick as many bars from current index as i can pick.
+ 
+
+PseudoCode:-
+
+This function will take 4 parameters, 'Count' array, 'vals' array, 'w' capacity of bag, 'n' size of each array.
+
+Structure that i'm gonna use,
+
+node {
+
+    int index, count, val;
+
+}
+
+treasurePicker(Count[], vals[], w, n)
+
+         Node Bars[n]                              // Define an array of 'Node' of size 'n'
+
+         int picks[n]                                  // 'picks[i]' will contain number of bars at index 'i'.
+
+         for i, 0 to n-1:                                 // Build 'Bars' array with data and initialize 'picks' array with all zeros.
+
+                 Bars[i].index = i
+
+                 Bars[i].count = Count[i]
+
+                 Bars[i].val = vals[i]
+
+                 picks[i] = 0
+
+         sort(Bars)                                   // Sort 'Bars' array according to values of 'val' in decreasing order
+
+         for i, 0 to n-1: 
+
+                 picks[Bars[i].index] = min(w, Bars[i].count)
+
+                 w -= Bars[i].count
+
+                 if w <= 0:
+
+                         break    
+
+Approach for choosing max metal bars:
+Pick the bars with the most values, pick the second most ...
+The bag can fit 7 at First
+Pick all the platinum (2 bars)
+Our bag can fit 5, we collected a value of 10 so far
+pick all the gold (4 bars)
+Our bag can only fit 1, we've collected a values of 22 so far (2 plat + 4 gold)
+with the one space we can pick one shteel bar for a total of 24
+
+Attempt #1
+
+In order to find the most expensive bars, lets just call max repeadtly
+If N = # of bars we have, how long would it take to find a single bar.
+In the worst case, we would vall max N times which would take overall O(N^2) steps
+
+Attempt 2
+
+Sort the bars by most valued to elast and pick highest to lowest
+
+/**
+The parameters: 
+count array that keeps track of the contents
+vals array that keeps track of the values that are inputed maybe
+int W for wumbo or capacity of the bag
+n = arr.length to keep track of contents to see if we got the bag full full
+
+W - counts val
+*/
+
+public static int bestValue(int W, int[] counts, int values[]) {
+    /**
+    
+    ComparatorCounter<RandomClass> comp = new ComparatorCounter<>();
+    Arrays.sort(array, comp);
+    System.out.println("compare count=" + comp.counter);
+
+    [4, 10, 2, 4] // 4 bars of gold, 10 silver, 2 platinum, 4 steel
+    and these values
+    [3, 1, 5, 2]  // gold worth 3 per bar, silver worth 1, platinum 5, steel 2
+
+    Then you would want to take this much of each metal
+
+    [4, 0, 2, 1]  // all the gold, no silver, all the platinum, 1 steel bar
+                  // for a total value of 24 (4*3 + 2*5 + 1*2)
+    **/
+    //Node bar[n];
+    
+    int totalBars = 0;
+    int barz = 0;
+    int total = 0;
+    if (counts.length <= 0){
+      return 0;
+    }
+    MetalBar[] bars = new MetalBar[counts.length];
+
+    for (int i = 0; i < values.length; i++){
+      bars[i] = new MetalBar(values[i], counts[i]);
+    }
+
+    Arrays.sort(bars);
+
+    for (int i = 0; i < bars.length; i++){
+        if(bars[i].getCount() >= W){
+          break;
+        }
+        else if (counts.length <= 1){
+            return bars[i].getCount();
+        }
+        else if (bars[i].getValue() <= W)
+        {
+        barz += bars[i].getCount();
+        total = bars[i].getCount()*bars[i].getValue() *barz ;
+        return total;
+        }
+        else
+        {
+            return W*bars[i].getValue() + total;
+        }
+      }
+        return 0;
+  }
+}
+
+  /*
+
+  W = 10 
+  counts = [1,2,3,4,5]
+  values = [3,5,1,9,2]
+
+  after sorting :
+  counts = [4,2,1,5,3]
+  values = [9,5,3,2,1]
+  W = 3 
+
+  result = 36 + 10 + 3 + 6 = 55
+  /
+}
+
+  //public int compare(bestValue W, bestValue)
+/**
+The parameters: 
+count array that keeps track of the contents
+vals array that keeps track of the values that are inputed maybe
+int W for wumbo or capacity of the bag
+n = arr.length to keep track of contents to see if we got the bag full full
+
+bars[i] - counts val
+
+Intuition:
+multiply array of Count and array of Value to get the total:
+Bars[i].getCount()
+totalBars = value.getValue() * counts.getValue()
+if  counts is > W then multiply w by value
+*/

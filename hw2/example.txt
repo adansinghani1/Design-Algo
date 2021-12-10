@@ -1,0 +1,52 @@
+### EXAMPLE QUESTION: ###
+
+What’s the best case, worst case, and average case runtime of binarySearch?
+Remember to justify your answer, provide a tight upper bound, and to define n.
+
+  public static int binarySearch(int[] arr, int target) {
+    int left = 0;
+    int right = arr.length - 1;
+    while (left <= right) {
+      int mid = (left + right)/2;
+      if (arr[mid] < target) {
+        left = mid+1;
+      } else if (arr[mid] > target) {
+        right = mid - 1;
+      } else {
+        return mid;
+      }
+    }
+    return -1;
+  }
+
+
+### EXAMPLE ANSWER: ###
+
+Best case is O(1), when we only need to iterate through the while loop once
+and find the target right away. In order for that to happen, the input array
+must always have the target value as the midpoint element. For example,
+
+        binarySearch({1, 2, 3, 4, 5}, 3)
+
+We can create arbitrarily long input arrays as long as the following is true
+about the array: arr[(arr.length-1)/2] = target.
+
+The worst case runtime is O(log(n)), where N is the size of the array. In
+this case, we'll want to iterate through the while loop as many times as
+possible, cutting the distance between left and right down by half each
+time until left > right. We can make this happen by introducing a target
+that's smaller than the smallest element in arr, such as
+
+        binarySearch({1, 2, 3, 4, 5}, 0)
+
+Since the search area is halved each time, we'll run the while loop ~log(n)
+times, and since we do constant work within that while loop, the overall
+runtime is O(1) * log(n) = O(log(n)).
+
+The average case is similar to the worst case, since the typical case will
+also include cases where you do not find the element and have to search
+through the array. There's math that would be required to calculate the
+average case for when the element is within the array, but we will "hand
+wave" and say that in the case where the target is within the array, it'll
+take on order of log(n) steps to find it.
+

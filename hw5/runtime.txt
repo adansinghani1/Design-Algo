@@ -1,0 +1,25 @@
+bfs algorithm runtime:
+The operations of visting a mode takes O(1) steps, so the total time to queue operations is O(|V|). Since the adjacency list of each vertex is checked when the vertex is dequeued, each adjacency list is scanned at most once. Since the sum of the lengths of all the adjacency lists is Θ(E), the total time spent in scanning adjacency lists is O(E). The overhead for initialization is O(V), and thus the total running time of BFS is O( |V| + |E| ).
+
+The best case senario:
+We can say the runtime for BFS is O(1) if there are no edges in the graph and if the the starting node is == node we are searching for. I provided an example of an empty graph called "empty graph.png" in my repository.
+
+The worst case senario:
+This happens if we are given an undirected graph and we look at each vertex one and each edge more than once. For the graph png file posted in my repository called "example.png", we can see that we visit nodes via the edges a couple of times because of having a node that has an arrow to another nodes connects back to the same node. 
+
+dfs algorithm runtime:
+For DFS it's similar to BFS, we loop through all of a vertices adjacency lists, calling each vertex takes O(1) steps and the total time take O(|V|) steps going through the for loop, which means that we take |V| time steps, plus the time to visit adjacent nodes (essentially, these form an edge, and we have a total of |E| edges, so our final runtime is O(|V| + |E|) time.
+
+The best case senario:
+We can say the runtime for DFS is O(1) if there are no edges in the graph and if the the starting node is == node we are searching for. I provided an example of an empty graph called "graph.png" in my repository.
+
+The worst case senario:
+This happens if we are given an undirected graph and we look at each vertex one and each edge more than once. For the graph png file posted in my repository called "example.png", we can see that we visit nodes via the edges a couple of times because of having a node that has an arrow to another nodes connects back to the same node. 
+
+bfs and dfs space complexity:
+
+It's O(V) because we have to visit each node and we are assuming we do not know the nodes prior (otherwise it would be O(1)). Since we have to tranverse to check each node. Again we only have to worry about the nodes in this case for space complexity because we can assume obtaining edges takes O(1) space since we only worry about the recursive calls from the nodes. So the total time complexity in the worst case is O(|V|).
+
+
+Notes:
+The Time complexity of BFS is O(V + E) when Adjacency List is used and O(V^2) when Adjacency Matrix is used

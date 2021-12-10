@@ -1,0 +1,17 @@
+What's a scenario where calling find will take many recursive calls, and afterwards, will take less?
+
+Please provide the calls to union and find that would cause this to happen.
+
+Find does something called "path compression". How long will find take to run on some node x the first time vs. the second?
+
+1. For the first time, the time to for the find method would be equal to the height or level of the node. This is because the method checks if the value of the node is equal to value of it's parent at each node. If it isn't then it makes a recursive call on the parent of the current node. So we can say the first time the method is executed, it would be time equal to the height/level of the node.
+
+For the second time, it would be constant time (O(1)) because we already visited each node the first time and the node is directly attached to the root. Since in Java it memorizes recursive steps from the first iteration, we can say it takes O(1) steps.
+
+In the absolute worst case, how many times will find need to make a recursive call on a single node when used in kruskal's?
+
+2. In the worst case, O(N) recursive calls would be made on a single node while finding the parent of the node if we didn't run it the first time and O(1) if the nodes are already recorded after that from the first call. We start by getting the variables x and y which is one call. Then we start by checking the if statement which is another call. Then if the if statement doesn't satsify all conditions, we go to the else statement which is another call. And finally after executing the else statement we check the embedded if statement each time the else statement is gone through so that makes the last recursive call. All in all we will call the program 4 times in the worst case if it has to go through all the conditions.
+
+What does rank signify for each node?
+
+3. The rank is the height or level of the two sets being combined once the union is done.

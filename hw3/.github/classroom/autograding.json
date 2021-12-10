@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "Q1",
+      "setup": "javac HW3.java",
+      "run": "java Verifier",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    }
+  ]
+}

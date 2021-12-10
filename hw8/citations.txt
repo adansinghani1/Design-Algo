@@ -1,0 +1,11 @@
+List the names of any students you worked with to complete this assignment.
+Subhash Tanikella
+Utsav Patel
+
+Link any references / videos / online tutorials / etc. that you used to complete this assignment.
+https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/
+https://www.kodnest.com/free-online-courses/algorithm-2/lessons/all-pairs-shortest-paths/topic/bellman-ford-algorithm-2/
+
+TAs:
+Jenny Liu
+Jared Mckinney

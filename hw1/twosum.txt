@@ -1,0 +1,33 @@
+algorithm twoSumFast
+  Input: arr indicies (values or integers) into HashSet seen to find indicies that sum up to target
+  Output: two indices that the sum of the values are equal to the targetSum or if not found, i = -1 and j = -1
+
+                                                                                                                   public static int[] twoSumFast(int[] arr, int target) {
+  seen = new HashSet that contains integer from arr                                                                  HashSet<Integer> seen = new HashSet<>();
+  for index j in arr                                                                                                 for (int j = 0; j < arr.length; j++) {
+    otherAddend  = target - arr[j]                                                                                     int otherAddend = target - arr[j];
+    if seen.contains(otherAddend)   // true                                                                            if (seen.contains(otherAddend)) {
+     for index i in arr                                                                                                 for (int i = 0; i < arr.length; i++) {
+         if arr[i] == otherAddend   // true                                                                                if (arr[i] == otherAddend)  {
+           return i,j                                                                                                        return new int[] {i, j};
+                                                                                                                           }
+                                                                                                                         }
+     else                                                                                                              } else {
+     seen.add(arr[j])                                                                                                    seen.add(arr[j]);
+                                                                                                                       }
+                                                                                                                     }
+  return -1,-1                                                                                                       return new int[] {-1, -1};
+                                                                                                                    }
+
+//Initialize Hashset named seen
+//for element j that transverses through arr to find one value that could sum up to the target
+//Initialize otherAddend variable that can subtract the target sum to find the other value that sums to the target
+//We find the value by using a contains method for variable otherAddend
+//for element i that transverses through arr to find the other value that could sum up to the target
+//if we find the index equal to otherAddend return value
+//return the indicies of the values [i,j]
+
+
+
+// if index is not found with i, then put value found with j back into HashSet seen
+// return indicies [-1,-1] because values were not found and -1 is not an index (so it is like returning null)

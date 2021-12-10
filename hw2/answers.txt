@@ -1,0 +1,123 @@
+### Q1 ###
+What's the worst case runtime of mystery1? Please remember to define n, provide
+a tight upper bound, and justify your answer. 
+
+The worst case runtime for mystery1 is O(log(n)) and the best case would be O(1) if z < 10, we would just return the value.
+The reason why the worst case runtime takes log(n) steps is because of line 4:
+mystery1(z/10);
+Since we are dividing z by 10, we can assume the worst case is log(n) and the tight upper bound is o(logn)
+n is defined as int z or variable z and the tight upper bound is O(log(n)).
+
+  public static void mystery1(int z) {  // n is being defined here as int z
+    System.out.println(z);    // we print z if it is < 10
+    if (z >= 10) {
+      mystery1(z/10);
+      System.out.println(z);
+    }
+  }
+
+
+### Q2 ###
+What's the worst case runtime of mystery2? Please remember to define n, provide
+a tight upper bound, and justify your answer.
+n is defined as int n in the parameter of mystery2.
+The tight upperbound is O(1) and the worst case runtime is O(1) as well.
+The reason why the runtime of mystery2 is O(1) is  because no matter how big the input becomes, we only do at most 7 steps. So take the number 126 which is divisable by 7. If we add 6 to it we get 132 which is not divisable by 7. So assuming n = 132, we would do n-1, n-2... n-6 til we get to n = 126 which is divisable by 7 and equals 18. So we can agree that at most, we took 7 steps and its a fixed number of steps regardless the size of the number, so we can conclude the worst case runtime of mystery2 is O(1)
+
+
+### Q3 ###
+What’s the best case, worst case, and average case runtime of pow? Assume n =
+power. Please remember to define n, provide a tight upper bound, and justify
+your answer.
+
+n = a positive integer p because our problem is contingent on the value of p. b is the "base" which gets multiplied by itself p amount of times.
+
+Worst case runtime would be O(n/2) or O(n) and the best case would be O(log(n)).
+
+The tight upper bound would be O(n) because in order for a program to have an tight upper bound, it has to be equivalent to the worst case runtime.
+
+Explanation of the worst case: for when the input p is odd, we decrement p by a value of 2 at each recursive subcall and because we decrement p by two, 
+we can take half the steps it would take if p was decremented by one which would result into O(n/2) which reduces to O(n).
+
+Explanation of the best case: For when input p is even, we can divide p by two which would result into another even number until we get to a base case of 1. 
+Since we divide p by half at each recursive call, this results us with a total of logn steps. Therefore, the best case runtime is when p is even, which is O(logN)
+
+Explanation of the average case: The runtime for the average case is O(n), because even though the best case takes logN steps given that p is an even number, 
+there since there is a fifty percent chance you could get p as an odd or even number, it is safe to say that the average runtime for this case is O(n).
+
+algorithm pow
+  Input: positive integer b, non-negative integer p   // the input would be p, being an non-negative integer.
+  Output: computing b^p (i.e. b raised to power of p)
+
+  if p = 0
+    return 1
+  else if p = 1
+    return b
+  else if p is even
+    temp = pow(b, p / 2)    // the one line that could change the worst case
+    return temp * temp
+  else
+    return b * b * pow(b, p-2)
+    
+    _____________________________________________________________________________________________________________________
+    
+In Java:
+class HW2Q3 {
+  public static void main(String[] args) {
+      pow(3, 2);
+  }
+  static double pow(double b, int p) {
+    double temp = 0;
+    if (p == 0){
+        return 1;
+    }
+    else if (p == 1){
+        return b;
+    }
+    else if (p % 2 == 0 || p % 2 != 1){
+        temp = pow(b, p / 2);    
+        return temp * temp;
+    }
+    else
+    {
+    return b * b * pow(b, p-2);   // the one line that could change the worst case
+    }
+  }
+}
+
+
+
+What one-line change could you make to improve the worst case? Describe the
+change below. You must provide a written explanation of why your change works
+in order to receive full credit.
+
+The last return statement:
+return b * b * pow(b, p-2);
+Is the reason why our worst case is O(n). Since we are decrementing p by two to get to the base case of one.
+To fix this we could change the code to something where if p % 2 != 0, we can make code to handle cube cases so:
+    else if (p % 3 == 0){
+        temp = pow(b, p / 3);    
+        return temp * temp * temp;
+    }
+    else if(p % 3 != 0 && p % 2 != 0){
+        temp = pow(b, p - 1);
+        return temp * b;
+    }
+    else
+    {
+    pow(b,p);
+    }
+    return 0;
+  }
+}
+
+The reason why this works and changes the worst case is because every other number is even while you can say the same for odd. So, if we have p = 19, we can agree that p - 1 = 18 which is able to be divided by 2 without a module and just takes one extra step and now 18/2 = 14 which is even, 14/2 = 7 which is odd and can not be divided by 2 or 3, but we can subtract p by 1 and multiply b by that number to cover for the last power. I provided a screenshot for my code.
+Given b = 2 and p = 7 since it is not able to by divided by 2 or 3, we subract p - 1
+b = 2 and p = 6 and 6 can be / 2 and have a modulo of 0. After we get the result, we can multiply the result by b to cover the power or p we subtracted
+2^6 = 64 * 2 = 128 and 2^7 == 128 so this method works without increasing the time complexity because AT MOST, we are making one extra call to decrement p.
+
+
+
+*best case is lower bound worst case is upper bound
+
+

@@ -1,0 +1,106 @@
+=== Q2 ===
+What's the best case runtime of mystery? Define N, provide an example,
+and justify your answer.
+N = size of Lst which is >= 1
+if given a lst of {7,3,5,6,17,18,21,9,4} N = 9 and since 8 >= 1, we can proceed with the program execution. k = 4
+The best case runtime should be O(1) for the line(s) below:
+    else if el = pivot      midLst = [7]
+        middle.add(el)        
+        
+    and the return statement in the if else if part of the code:
+    
+    else if k < left.size() + middle.size()
+      return middle.get(0)
+      
+However after these lines we have if, else if, and else statements, which change the runtime of the problem. Since we have to sort the list into the following sublists: leftLst, midLst, and rightLst, we take 3N steps with k because we are inputing integers into each repective list (leftLst has integers less than pivot, midLst has the pivot and rightLst has values > pivot). So the best case runtime for mystery should be O(N) and the reason for that is if we are given a list where the size of leftList being N is greater than the value of k which is between 0 and N-1 inclusive, it would not suffice the requirement of being inclusive to N - 1 so we can just return the pivot point or middleLst. This still requires us to do N steps or N/2 because we are still dividing the lists by half moving it into leftLst and rightLst. If we sorted the lists from our example:
+leftLst[3,5,6,4]
+middleLst[7]
+rightLst[17,18,21]
+We can see the lsts are sorted by the only statement we can print out is: return mystery(right, k-left.size()-middle.size()), because our k is > the size of the lsts (or N) for both the leftLst and leftLst + middleLst thus the runtime would be O(N+k).
+
+=== Q3 ===
+What's the worst case runtime of mystery? Define N, provide an example,
+and justify your answer.
+N = size of Lst which is >= 1
+if given a lst of {82, 50, 76, 89, 95, 57, 34, 37, 85, 53} N = 10 and since 5 >= 1, we can proceed with the program execution. k = 5
+The worst case is O(N^2) where N is the size of the list. 
+The reason the worst case is O(N^2) is because of the following lines below:
+  if el < pivot
+      left.add(el)
+  if k < left.size()
+    return mystery(left, k)
+    
+The line above states if k is less than the size of leftLst being N, we return the content of that list and start the process over again until we reach the base case of having one element being the pivot (return middle.get(0) or k is > than the size N of both leftLst and middleLst so we have to execture the last else statement in the code. I worked out my example below:
+{82, 50, 76, 89, 95, 57, 34, 37, 85, 53, 5},
+      
+      left = [50,76,57,34,37,53,5]
+      middle = [82]
+      right = [89,95,85] 
+    
+{50,76,57,34,37,53,5},
+      
+      left = [34,37,5]
+      middle = [50]
+      right = [76, 57, 53]
+      
+{76, 57, 53, 2}
+
+As we can see above, we made two iterations of leftLst before returning the last line which was rightLst, k - leftLst.size() - middleLst.size(). Since the pivot point is always the first element of the list we see that there are more values < than the pivot than there are > than the pivot so this requires us to do more work where we have to wait till N being the size of the list (specifically leftList) is < k which is an integer between 0 and N-1 inclusive and thus our program take N^2 steps to run and the worst case runtime is O(N^2+k)
+
+
+=== Q4 ===
+What's the average case runtime of mystery? Define N, provide an example,
+and justify your answer.
+N = size of Lst which is >= 1
+if given a lst of {3,5,6,17,18,21,9,4} N = 8 and since 8 >= 1, we can proceed with the program execution.
+The average case runtime of mystery is the same as the best case runtime because we can't assume that we will achieve the best case runtime at each instance, so we can assume it is equivalent to the best case which is O(N+k) With quickSort, we are more than likely not given the highest value in the array as the pivot point so we can say the average case is equivalent to the best case.
+
+=== Q5 ===
+What's the space complexity of mystery? Define N and justify your answer.
+N = size of Lst which is >= 1
+if given a lst of {3,5,6,17,18,21,9,4} N = 8 and since 8 >= 1, we can proceed with the program execution.
+The space complexity of the problem is O(N^2) because we created three different lists : left, middle, right which uses three steps and everything else is manipulated through
+those three lists. If we have to make multiple recursive calls, that requires to store each of the lists at each recursive call. So our space would be N(N+1)/2 - 1 + k where N is the size of the intialized lists (left,middle,right) and we can remove the constant, N + 1 is the expanding of each respective list at each recursive call, 1/2 represents dividing the initial list into left and right lists and k is an integer between 0 and N-1 inclusive. So we can say the space complexity of mystery is O(N^2).
+
+=== Q6 ===
+What does mystery do? Specify the output as precisely as possible.
+We start by giving a string which is our pantherID. Once given, we are given an list of integers which in my case were: [33, 20, 67, 18, 25, 65, 45, 27, 20, 47]. We define N as the size of the list which is 10 and k which is given and is 5. Now that we defined everything we want to ultimately reach the base case which is the first line and that is we want the size the list be less than 2 or basically one and return the first element (only element) in the list. We want to use a form of QuickSort to have the first element as the pivot and seperate values into two different lists. The first is values that are less than the first index 33 will be placed in the left list and values greater than the 
+first pivot being 33 will be placed in the right list. We also have a list called middle and that is where we place the pivot point and no other values will be placed in there unless they are == to the value of the first element of the list (say 20 is the first element and the list has two number 20's, it will then be placed in the middleList because of the following line:
+else if el = pivot
+      middle.add(el)
+Once we get the values sorted in the list, we check if k is less than the size of the left list and if that is the case, then we would return the leftList and start the process again until we reach the base case.
+If the if statement is not executed, then we see if the 
+
+  if lst.size() < 2
+    return lst.get(0)
+    
+  First we check the size of the lst that we are given as an input and check if N (being the size of the list is < 2) and we are given k = 5.
+  If our list is [33, 20, 67, 18, 25, 65, 45, 27, 20, 47], we can say the size of the list is 10. Since 10 < 2, we continue to the next line involving the pivot and make our
+  first index of the list our pviot.
+  
+  pivot = lst.get(0)
+  
+  In this case index[0] = 33
+  
+  left = new list of integers       One step N
+  middle = new list of integers     One step 2N
+  right = new list of integers      One step 3N
+  for each element el in lst
+    if el < pivot
+      left.add(el)                  leftLst = [20,18,25,27,20,5] all values less than the pivot which we stated was 33
+    else if el = pivot
+      middle.add(el)                midLst = [33]   (we simply insert index[0] which is the pivot point into the middle
+    else
+      right.add(el)                 rightLst = [67,65,47]   all values greater than the pivot which is 33 go in the rightLst
+    if k < left.size()                k = 5  and sizeofleftLst is 6 so 5 < 6 True, return leftLst above
+      return mystery(left, k)         leftLst = [20,18,25,27,20,5]
+    
+  else if k < left.size() + middle.size()   if it was true, then we would where 5 < 6 + 1 -> 5 < 7 then we would just return the list with the pivot.
+    return middle.get(0)
+  else
+    return mystery(right, k-left.size()-middle.size())      we return rightLst which is [67,65,47], 5 - 6 - 1 which will result in a negative number in this case.
+    
+Our program gives us an array based off of our pantherID and we sort it using quickSort and depending how the array is sorted and the size of the lists after sorting it (N) in comparison to k. One way you will need to have multiple recursive calls (worst case runtime) is if the pivot point is the biggest or one of the biggest values in the array because then N of leftLst will be greater than k which in the pseudocode means we have to go through the leftLst once more taking the first index as a pivot, placing it in the middle and placing each value in the respective list. We want k to be < than the size of the leftLst and k has to be less than N of left and the size of middle lists combined so we can return the right list with k - the size of the left list - the size of the middle list. The output is dependent on the array given. If k is == N of leftLst, the output would be the given array. The other ouput would be if the N of left List is > than k we can condense it until the leftList is < k and return the right list along with k - N of left and N of middle.
+
+Ultimately we can see that we have three lists, one that is <  k, one that is equal to k, and the last > k. We sort the values around the pivot which is place in the middleList if < middle -> put it in leftList and if > middle -> put it in rightList. Our goal is to get the left list condense to include integers from the right list and the right list to contain elements from the left list so it can be properly sorted.
+

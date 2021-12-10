@@ -1,0 +1,12 @@
+1.
+In the Bellman-Ford algorithm, we have to check all the possible edges for each vertices. Since we are check all possible edges for each verticies we can say we look at the Node or Vertex (|V|) times the Edge(s) (|E|) (which may have constant depending on if it has multiple, but will be removed once given the simplified runtime). That is why the time compexity of Bellman-Ford is O( |V|*|E|).
+
+ 
+2.
+If we replace "Repeat |V| times" with  "Repeat |V| - 1 times" then the algorithm will work for only positive edges but not for negative edges.
+This step calculates shortest distances from the vertex. Considering if we continue to transverse through the matrix, if we "Repeat |V| times" we are able to look back at the matrix to the previous column at the same index (row) if the current size of the bag can not fit the next biggest fused bar. So if we repeat at |V| - 1 times instead of |V| times, we will only be looking at |V| - 1 and |V| - 2 and not |V| so we can not look for negative weight in the graph, but we can still look at the positive weight.
+
+
+3.
+In a simple path with a graph that has |V| verticies we always have to look for the shortest distance(s) using |V| - 1 that is running in the last for loop. So the first loop looks at the shortest distance along with the weight and the second loop checks to see if there are any other verticies that contain a shorter distance. So if "if dist[u] + l(u, v) < dist[u]" is true, then this says the shortest path is < current distance of |V| - 1 vertex which means it will create a negative cycle.
+

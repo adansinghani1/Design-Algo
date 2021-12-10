@@ -1,0 +1,47 @@
+  public static int bestValue(int W, int[] counts, int values[]) {
+    /**
+    [4, 10, 2, 4] // 4 bars of gold, 10 silver, 2 platinum, 4 steel
+    and these values
+    [3, 1, 5, 2]  // gold worth 3 per bar, silver worth 1, platinum 5, steel 2
+
+    Then you would want to take this much of each metal
+
+    [4, 0, 2, 1]  // all the gold, no silver, all the platinum, 1 steel bar
+                  // for a total value of 24 (4*3 + 2*5 + 1*2)
+    **/
+    //Node bar[n];
+    
+    int totalBars = 0;
+    int temp = 0;
+    int barz = 0;
+    int total = 0;
+    int maxrow = 0;
+    if (counts.length <= 0){
+      return 0;
+    }
+    MetalBar[] bars = new MetalBar[counts.length];
+
+    for (int i = 0; i < bars.length; i++){
+      bars[i] = new MetalBar(values[i], counts[i]);
+    }
+
+    Arrays.sort(bars);
+
+    for (int i = 0; i < bars.length; i++){
+        temp = W - bars[i].getCount();
+        // base case
+        if (bars.length <= 1){
+            return bars[i].getCount();
+        }
+        //while (bars[i].getCount() < W)
+        while(bars[i].getCount() < W && bars.length >= 1 && temp < W)
+        {
+            totalBars += bars[i].getValue() * bars[i].getCount();
+                return totalBars;
+
+        }
+            return W * bars[i].getValue();
+        }
+    return 0;
+  }
+}

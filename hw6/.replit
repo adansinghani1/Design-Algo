@@ -1,0 +1,2 @@
+language = "java10"
+run = "rm HW6.class; javac *.java; java HW6"

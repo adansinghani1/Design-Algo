@@ -1,0 +1,32 @@
+How many times will we call makeset within kruskal's? Put your answer in terms of |V| and |E|.  |V| steps since in the for loop we are looking at all of V (vertices) to makeset(u) and since we are looking for all u that exist in V, it will take |V| steps to 
+for all u ∈ V:
+    makeset(u)
+How many times will we have to call find within kruskal's? Put your answer in terms of |V| and |E|. 2|E|or |E|*2 steps since we are looking at each u and v in each set. We can drop the constant and it will be |E| steps
+How many times will we call union within kruskals? Put your answer in terms of |V| and |E|. |E| steps because we are looking at the set {u,v} at each edge that satifises the condition.
+Describe using your own words why "find(u) != find(v)" is the same as "if this edge doesn't cause a cycle". Please include an example. You may find the homework party to be helpful here. The reason why find(u) != find(v) is == this edge does not cause a cycle is because lets say you are given a number of vertices say Set E contains E = {A,B,C,D,E} and then when we make pairs we get A-B | B-D | C-D | and we are left with E without a UNIQUE vertex paired with it. So lets say E can also be paired with D so we get | D-E | and finally E-B which would in turn make a cycle because we can revert back to the start node. (Example is in example.png file) So basically it is infact saying if u and v are not in the same set then adding an edge will not cause a cycle, but if it does then it will make a cycle in the graph.
+
+--------------------------------------------
+
+Dijkstra's -- Pick the next unvisited node that's closest to s based on dist and process its neighbors.
+Prim's -- Pick the next cheapest unvisited node to visit.
+Kruskal's -- Pick the next cheapest edge that doesn't cause a cycle.
+In general, a greedy algorithm will try to maximize benefit (or minimize cost) at each step.
+
+For spanning trees on a graph with |V| nodes, we have exactly|V| - 1 edges
+
+Issues with Krustals:
+1. Disconnected so hard to define when to stop / if we picked too few
+2. Can't create a cycle so hard to maximize efficiency
+
+Do until we achieve |V| - 1 edges
+For loop will run at most |E| times, assuming edge is the cheapest from the forloop and overall, it is O(|E|log(|E|))
+|E| = O(|V|^2) in worst case for a fully connected graph
+O(|E|*log(|E|)) -> O(|E|log(|V|^2))
+
+Overview of Krustal's:
+Unique algorithm
+Peeps edges and doesn't care about nodes
+No start node
+MST can be disconnected and become connected as it runs
+
+|V|, |E|*2,|E|
